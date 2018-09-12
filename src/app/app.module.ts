@@ -2,6 +2,8 @@ import { NgModule }       from '@angular/core';
 import { BrowserModule }  from '@angular/platform-browser';
 import { FormsModule }    from '@angular/forms';
 import { HttpClientModule }    from '@angular/common/http';
+import { NbThemeModule } from '@nebular/theme';
+import { NbSidebarModule, NbLayoutModule, NbSidebarService } from '@nebular/theme';
  
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService }  from './in-memory-data.service';
@@ -21,7 +23,11 @@ import { MessagesComponent }    from './messages/messages.component';
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
- 
+    NbThemeModule.forRoot(
+      { name: 'default' } // this will enable the default theme, you can change this to `cosmic` to enable the dark theme
+    ),
+    NbLayoutModule,
+    NbSidebarModule,
     // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
     // and returns simulated server responses.
     // Remove it when a real server is ready to receive requests.
@@ -37,6 +43,7 @@ import { MessagesComponent }    from './messages/messages.component';
     MessagesComponent,
     HeroSearchComponent
   ],
-  bootstrap: [ AppComponent ]
+  bootstrap: [ AppComponent ],
+  providers: [NbSidebarService]
 })
 export class AppModule { }
